@@ -2,6 +2,7 @@ import "dotenv/config"
 import express from "express"
 import cors from "cors"
 import authRoutes from "./routes/authRoutes"
+import vineyardsRoutes from "./routes/vineyardsRoutes"
 import { pool } from "./config/db"
 
 const app = express()
@@ -32,6 +33,8 @@ app.get("/", (_req, res) => {
 })
 
 app.use("/auth", authRoutes)
+app.use("/vineyards", vineyardsRoutes)
+
 
 async function startServer() {
   try {
