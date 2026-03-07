@@ -1,11 +1,8 @@
+import "dotenv/config"
 import express from "express"
 import cors from "cors"
-import dotenv from "dotenv"
 import authRoutes from "./routes/authRoutes"
-import testRoutes from "./routes/testRoutes"
 import { pool } from "./config/db"
-
-dotenv.config()
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -35,7 +32,6 @@ app.get("/", (_req, res) => {
 })
 
 app.use("/auth", authRoutes)
-app.use("/test", testRoutes)
 
 async function startServer() {
   try {
