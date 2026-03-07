@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 const JWT_SECRET = process.env.JWT_SECRET || "default_secret"
 
 type JwtPayload = {
+  id: number
   username: string
   role: string
   iat?: number
