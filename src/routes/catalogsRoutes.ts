@@ -1,9 +1,6 @@
 import { Router } from "express"
 import { authenticateToken } from "../middlewares/authMiddleware"
-import {
-  getGrapeVarieties,
-  getProducts,
-} from "../controllers/catalogsController"
+import { getGrapeVarieties, getProducts,} from "../controllers/catalogsController"
 
 const router = Router()
 
