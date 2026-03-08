@@ -36,3 +36,20 @@ export async function getAllProducts(): Promise<Product[]> {
 
   return result.rows
 }
+
+export type WorkActivityType = {
+  id: number
+  name: string
+}
+
+export async function getAllWorkActivityTypes(): Promise<WorkActivityType[]> {
+  const result = await pool.query(
+    `
+    SELECT id, name
+    FROM work_activity_types
+    ORDER BY name ASC
+    `
+  )
+
+  return result.rows
+}
