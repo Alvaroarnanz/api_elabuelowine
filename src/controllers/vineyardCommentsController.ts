@@ -3,6 +3,7 @@ import {
   createVineyardComment,
   getCommentsByVineyardId,
   updateVineyardComment,
+  deleteVineyardComment,
 } from "../repositories/vineyardCommentsRepository"
 
 export async function getVineyardComments(req: Request, res: Response) {
@@ -74,5 +75,22 @@ export async function updateVineyardCommentController(
   } catch (error) {
     console.error("Error actualizando comentario:", error)
     return res.status(500).json({ message: "Error actualizando comentario" })
+  }
+}
+
+export async function deleteVineyardCommentController(
+  req: Request,
+  res: Response
+) {
+  try {
+    const commentId = Number(req.params.commentId)
+
+    await deleteVineyardComment(commentId)
+
+    return res.status(204).send()
+
+  } catch (error) {
+    console.error("Error borrando comentario:", error)
+    return res.status(500).json({ message: "Error borrando comentario" })
   }
 }

@@ -114,3 +114,10 @@ export async function updateVineyardWorkLog(
 
   return result.rows[0]
 }
+
+export async function deleteVineyardWorkLog(logId: number) {
+  await pool.query(
+    `DELETE FROM vineyard_work_logs WHERE id = $1`,
+    [logId]
+  )
+}

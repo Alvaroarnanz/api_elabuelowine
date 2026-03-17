@@ -3,6 +3,7 @@ import {
   createVineyardWorkLog,
   getWorkLogsByVineyardId,
   updateVineyardWorkLog,
+  deleteVineyardWorkLog,
 } from "../repositories/vineyardWorkLogsRepository"
 
 export async function getVineyardWorkLogs(req: Request, res: Response) {
@@ -89,6 +90,25 @@ export async function updateVineyardWorkLogController(
     console.error("Error actualizando trabajo:", error)
     return res.status(500).json({
       message: "Error actualizando trabajo",
+    })
+  }
+}
+
+export async function deleteVineyardWorkLogController(
+  req: Request,
+  res: Response
+) {
+  try {
+    const logId = Number(req.params.logId)
+
+    await deleteVineyardWorkLog(logId)
+
+    return res.status(204).send()
+
+  } catch (error) {
+    console.error("Error borrando trabajo:", error)
+    return res.status(500).json({
+      message: "Error borrando trabajo",
     })
   }
 }

@@ -69,3 +69,10 @@ export async function updateVineyardComment(
 
   return result.rows[0]
 }
+
+export async function deleteVineyardComment(commentId: number) {
+  await pool.query(
+    `DELETE FROM vineyard_comments WHERE id = $1`,
+    [commentId]
+  )
+}
