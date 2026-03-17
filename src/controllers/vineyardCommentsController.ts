@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import {
   createVineyardComment,
   getCommentsByVineyardId,
+  updateVineyardComment,
 } from "../repositories/vineyardCommentsRepository"
 
 export async function getVineyardComments(req: Request, res: Response) {
@@ -48,5 +49,30 @@ export async function postVineyardComment(req: Request, res: Response) {
   } catch (error) {
     console.error("Error creando comentario:", error)
     return res.status(500).json({ message: "Error creando comentario" })
+  }
+}
+
+export async function updateVineyardCommentController(
+  req: Request,
+  res: Response
+) {
+  try {
+    const commentId = Number(req.params.commentId)
+    const { comment_text } = req.body
+
+    if (!comment_text || !String(comment_text).trim()) {
+      return res.status(400).json({ message: "Comentario vacío" })
+    }
+
+    const updated = await updateVineyardComment(
+      commentId,
+      String(comment_text).trim()
+    )
+
+    return res.status(200).json(updated)
+
+  } catch (error) {
+    console.error("Error actualizando comentario:", error)
+    return res.status(500).json({ message: "Error actualizando comentario" })
   }
 }

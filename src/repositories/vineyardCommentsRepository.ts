@@ -52,3 +52,20 @@ export async function createVineyardComment(params: {
 
   return result.rows[0]
 }
+
+export async function updateVineyardComment(
+  commentId: number,
+  comment_text: string
+) {
+  const result = await pool.query(
+    `
+    UPDATE vineyard_comments
+    SET comment_text = $1
+    WHERE id = $2
+    RETURNING id, comment_text, created_at
+    `,
+    [comment_text, commentId]
+  )
+
+  return result.rows[0]
+}

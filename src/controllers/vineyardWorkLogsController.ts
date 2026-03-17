@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import {
   createVineyardWorkLog,
   getWorkLogsByVineyardId,
+  updateVineyardWorkLog,
 } from "../repositories/vineyardWorkLogsRepository"
 
 export async function getVineyardWorkLogs(req: Request, res: Response) {
@@ -59,5 +60,35 @@ export async function postVineyardWorkLog(req: Request, res: Response) {
   } catch (error) {
     console.error("Error creando histórico de trabajo:", error)
     return res.status(500).json({ message: "Error creando histórico de trabajo" })
+  }
+}
+export async function updateVineyardWorkLogController(
+  req: Request,
+  res: Response
+) {
+  try {
+    const logId = Number(req.params.logId)
+
+    const {
+      work_date,
+      hours_worked,
+      activity_type_id,
+      notes,
+    } = req.body
+
+    const updated = await updateVineyardWorkLog(logId, {
+      work_date,
+      hours_worked: Number(hours_worked),
+      activity_type_id: Number(activity_type_id),
+      notes: notes ?? null,
+    })
+
+    return res.status(200).json(updated)
+
+  } catch (error) {
+    console.error("Error actualizando trabajo:", error)
+    return res.status(500).json({
+      message: "Error actualizando trabajo",
+    })
   }
 }

@@ -82,3 +82,35 @@ export async function createVineyardWorkLog(params: {
 
   return result.rows[0]
 }
+
+export async function updateVineyardWorkLog(
+  logId: number,
+  params: {
+    work_date: string
+    hours_worked: number
+    activity_type_id: number
+    notes: string | null
+  }
+) {
+  const result = await pool.query(
+    `
+    UPDATE vineyard_work_logs
+    SET
+      work_date = $1,
+      hours_worked = $2,
+      activity_type_id = $3,
+      notes = $4
+    WHERE id = $5
+    RETURNING *
+    `,
+    [
+      params.work_date,
+      params.hours_worked,
+      params.activity_type_id,
+      params.notes,
+      logId,
+    ]
+  )
+
+  return result.rows[0]
+}
