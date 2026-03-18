@@ -42,7 +42,7 @@ export async function postVineyard(req: Request, res: Response) {
   try {
     const {
       name,
-      hecrares,
+      hectares,
       grape_type_id,
       area,
       description,
@@ -50,15 +50,15 @@ export async function postVineyard(req: Request, res: Response) {
       tractor_access,
     } = req.body
 
-    if (!name || !hecrares || !grape_type_id) {
+    if (!name || !hectares || !grape_type_id) {
       return res.status(400).json({
-        message: "name, hecrares y grape_type_id son obligatorios",
+        message: "name, hectares y grape_type_id son obligatorios",
       })
     }
 
     const vineyard = await createVineyard({
       name,
-      hecrares: Number(hecrares),
+      hectares: Number(hectares),
       grape_type_id: Number(grape_type_id),
       area: area ?? null,
       description: description ?? null,
@@ -83,7 +83,7 @@ export async function putVineyard(req: Request, res: Response) {
 
     const {
       name,
-      hecrares,
+      hectares,
       grape_type_id,
       area,
       description,
@@ -91,15 +91,15 @@ export async function putVineyard(req: Request, res: Response) {
       tractor_access,
     } = req.body
 
-    if (!name || !hecrares || !grape_type_id) {
+    if (!name || !hectares || !grape_type_id) {
       return res.status(400).json({
-        message: "name, hecrares y grape_type_id son obligatorios",
+        message: "name, hectares y grape_type_id son obligatorios",
       })
     }
 
     const vineyard = await updateVineyard(id, {
       name,
-      hecrares: Number(hecrares),
+      hectares: Number(hectares),
       grape_type_id: Number(grape_type_id),
       area: area ?? null,
       description: description ?? null,
