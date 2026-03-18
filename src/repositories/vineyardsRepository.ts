@@ -3,7 +3,7 @@ import { pool } from "../config/db"
 export type Vineyard = {
   id: number
   name: string
-  square_meters: number
+  hecrares: number
   grape_type_id: number
   area: string | null
   description: string | null
@@ -17,7 +17,7 @@ export async function getAllVineyards(): Promise<Vineyard[]> {
     SELECT 
       id,
       name,
-      square_meters,
+      hecrares,
       grape_type_id,
       area,
       description,
@@ -37,7 +37,7 @@ export async function getVineyardById(id: number): Promise<Vineyard | null> {
     SELECT 
       id,
       name,
-      square_meters,
+      hecrares,
       grape_type_id,
       area,
       description,
@@ -61,7 +61,7 @@ export async function createVineyard(data: Omit<Vineyard, "id">): Promise<Vineya
     `
     INSERT INTO vineyards (
       name,
-      square_meters,
+      hecrares,
       grape_type_id,
       area,
       description,
@@ -72,7 +72,7 @@ export async function createVineyard(data: Omit<Vineyard, "id">): Promise<Vineya
     RETURNING
       id,
       name,
-      square_meters,
+      hecrares,
       grape_type_id,
       area,
       description,
@@ -81,7 +81,7 @@ export async function createVineyard(data: Omit<Vineyard, "id">): Promise<Vineya
     `,
     [
       data.name,
-      data.square_meters,
+      data.hecrares,
       data.grape_type_id,
       data.area,
       data.description,
@@ -102,7 +102,7 @@ export async function updateVineyard(
     UPDATE vineyards
     SET
       name = $1,
-      square_meters = $2,
+      hecrares = $2,
       grape_type_id = $3,
       area = $4,
       description = $5,
@@ -112,7 +112,7 @@ export async function updateVineyard(
     RETURNING
       id,
       name,
-      square_meters,
+      hecrares,
       grape_type_id,
       area,
       description,
@@ -121,7 +121,7 @@ export async function updateVineyard(
     `,
     [
       data.name,
-      data.square_meters,
+      data.hecrares,
       data.grape_type_id,
       data.area,
       data.description,
