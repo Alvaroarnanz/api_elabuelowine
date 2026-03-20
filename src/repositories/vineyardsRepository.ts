@@ -9,6 +9,7 @@ export type Vineyard = {
   description: string | null
   has_trellises: boolean | null
   tractor_access: boolean | null
+  coordinates: boolean | null
 }
 
 export async function getAllVineyards(): Promise<Vineyard[]> {
@@ -22,7 +23,8 @@ export async function getAllVineyards(): Promise<Vineyard[]> {
       area,
       description,
       has_trellises,
-      tractor_access
+      tractor_access,
+      coordinates
     FROM vineyards
     ORDER BY id DESC
     `
@@ -42,7 +44,8 @@ export async function getVineyardById(id: number): Promise<Vineyard | null> {
       area,
       description,
       has_trellises,
-      tractor_access
+      tractor_access,
+      coordinates
     FROM vineyards
     WHERE id = $1
     `,
@@ -66,7 +69,8 @@ export async function createVineyard(data: Omit<Vineyard, "id">): Promise<Vineya
       area,
       description,
       has_trellises,
-      tractor_access
+      tractor_access,
+      coordinates
     )
     VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING
@@ -77,7 +81,8 @@ export async function createVineyard(data: Omit<Vineyard, "id">): Promise<Vineya
       area,
       description,
       has_trellises,
-      tractor_access
+      tractor_access,
+      coordinates
     `,
     [
       data.name,
@@ -87,6 +92,7 @@ export async function createVineyard(data: Omit<Vineyard, "id">): Promise<Vineya
       data.description,
       data.has_trellises,
       data.tractor_access,
+      data.coordinates,
     ]
   )
 
@@ -107,8 +113,9 @@ export async function updateVineyard(
       area = $4,
       description = $5,
       has_trellises = $6,
-      tractor_access = $7
-    WHERE id = $8
+      tractor_access = $7,
+      coordinates = ~$8
+    WHERE id = $9
     RETURNING
       id,
       name,
@@ -117,7 +124,8 @@ export async function updateVineyard(
       area,
       description,
       has_trellises,
-      tractor_access
+      tractor_access,
+      coordinates
     `,
     [
       data.name,
@@ -127,6 +135,7 @@ export async function updateVineyard(
       data.description,
       data.has_trellises,
       data.tractor_access,
+      data.coordinates,
       id,
     ]
   )
