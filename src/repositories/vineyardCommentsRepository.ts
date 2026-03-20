@@ -60,7 +60,8 @@ export async function updateVineyardComment(
   const result = await pool.query(
     `
     UPDATE vineyard_comments
-    SET comment_text = $1
+    SET comment_text = $1,
+    updated_at = NOW()
     WHERE id = $2
     RETURNING id, comment_text, created_at
     `,

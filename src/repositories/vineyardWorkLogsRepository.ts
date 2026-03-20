@@ -99,7 +99,8 @@ export async function updateVineyardWorkLog(
       work_date = $1,
       hours_worked = $2,
       activity_type_id = $3,
-      notes = $4
+      notes = $4,
+      updated_at = NOW()
     WHERE id = $5
     RETURNING *
     `,
