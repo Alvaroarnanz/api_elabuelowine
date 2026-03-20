@@ -48,6 +48,7 @@ export async function postVineyard(req: Request, res: Response) {
       description,
       has_trellises,
       tractor_access,
+      coordinates,
     } = req.body
 
     if (!name || !hectares || !grape_type_id) {
@@ -64,6 +65,7 @@ export async function postVineyard(req: Request, res: Response) {
       description: description ?? null,
       has_trellises: has_trellises ?? null,
       tractor_access: tractor_access ?? null,
+      coordinates: coordinates ?? null,
     })
 
     return res.status(201).json(vineyard)
@@ -89,6 +91,7 @@ export async function putVineyard(req: Request, res: Response) {
       description,
       has_trellises,
       tractor_access,
+      coordinates,
     } = req.body
 
     if (!name || !hectares || !grape_type_id) {
@@ -105,6 +108,7 @@ export async function putVineyard(req: Request, res: Response) {
       description: description ?? null,
       has_trellises: has_trellises ?? null,
       tractor_access: tractor_access ?? null,
+      coordinates: coordinates ?? null,
     })
 
     if (!vineyard) {
