@@ -4,6 +4,7 @@ import cors from "cors"
 import authRoutes from "./routes/authRoutes"
 import vineyardsRoutes from "./routes/vineyardsRoutes"
 import catalogsRoutes from "./routes/catalogsRoutes"
+import farmersRoutes from "./routes/farmersRoutes"
 import { pool } from "./config/db"
 
 const app = express()
@@ -37,6 +38,7 @@ app.get("/", (_req, res) => {
 app.use("/auth", authRoutes)
 app.use("/vineyards", vineyardsRoutes)
 app.use("/catalogs", catalogsRoutes)
+app.use("/farmers", farmersRoutes)
 
 async function startServer() {
   try {
