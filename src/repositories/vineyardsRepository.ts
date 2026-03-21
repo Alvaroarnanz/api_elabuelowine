@@ -103,6 +103,7 @@ export async function updateVineyard(
   id: number,
   data: Omit<Vineyard, "id">
 ): Promise<Vineyard | null> {
+  console.log(data)
   const result = await pool.query(
     `
     UPDATE vineyards
@@ -114,7 +115,7 @@ export async function updateVineyard(
       description = $5,
       has_trellises = $6,
       tractor_access = $7,
-      coordinates = ~$8
+      coordinates = $8
     WHERE id = $9
     RETURNING
       id,
